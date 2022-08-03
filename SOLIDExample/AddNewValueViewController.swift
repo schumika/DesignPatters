@@ -12,7 +12,7 @@ class AddNewValueViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneLabel: UILabel!
     
-    var onSave:(String)->(Bool) = { _ in true }
+    var dataSaver: DataSaver!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,7 +21,7 @@ class AddNewValueViewController: UIViewController {
     }
     
     @IBAction func doneClicked(_ sender: Any) {
-        guard self.onSave(self.textField.text ?? "") else { return }
+        guard self.dataSaver.save(value: self.textField.text ?? "") else { return }
         self.onDone()
     }
     

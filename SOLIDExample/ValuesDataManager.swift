@@ -7,8 +7,11 @@
 
 import Foundation
 
+protocol DataSaver {
+    func save(value: String) -> Bool
+}
 
-class ValuesDataManager {
+class ValuesDataManager: DataSaver {
     private var values: [String] = []
     
     var numberOfElements: Int { self.values.count }
