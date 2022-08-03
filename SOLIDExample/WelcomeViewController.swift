@@ -11,7 +11,7 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func continueClicked(_ sender: Any) {
         let vc = self.getValuesViewController()
-        vc.dataManager = ValuesDataManager.init()
+        vc.dataManager = UniqueValuesDataManager.init()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

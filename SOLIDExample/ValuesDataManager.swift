@@ -16,9 +16,10 @@ class ValuesDataManager {
         self.values[ind]
     }
     
-    func save(value: String) {
+    func save(value: String) -> Bool {
         // Saving...
         self.addNew(value)
+        return true
     }
 }
 
@@ -29,5 +30,13 @@ extension ValuesDataManager {
     
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
+    }
+}
+
+class UniqueValuesDataManager: ValuesDataManager {
+    override func save(value: String) -> Bool {
+        guard !containsValue(value) else { return false }
+        self.addNew(value)
+        return true
     }
 }

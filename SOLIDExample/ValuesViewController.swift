@@ -51,7 +51,7 @@ extension ValuesViewController {
         let addNewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewValueViewController") as? AddNewValueViewController ?? AddNewValueViewController()
         
         addNewVC.onSave = { [weak self] value in
-            self?.dataManager.save(value: value)
+            self?.dataManager.save(value: value) ?? false
         }
         
         return addNewVC

@@ -12,7 +12,7 @@ class AddNewValueViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneLabel: UILabel!
     
-    var onSave:(String)->() = { _ in }
+    var onSave:(String)->(Bool) = { _ in true }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -20,9 +20,8 @@ class AddNewValueViewController: UIViewController {
         self.textField.becomeFirstResponder()
     }
     
-    
     @IBAction func doneClicked(_ sender: Any) {
-        self.onSave(self.textField.text ?? "")
+        guard self.onSave(self.textField.text ?? "") else { return }
         self.onDone()
     }
     
