@@ -2,10 +2,9 @@
 //  DisplayableValue.swift
 //  SOLIDExample
 //
-//  Created by Calugar Anca Maria on 02.08.2022.
+//  Created by Calugar Anca Maria on 03.08.2022.
 //
 
-import Foundation
 import UIKit
 
 protocol Displayable {

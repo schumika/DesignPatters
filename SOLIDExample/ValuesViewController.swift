@@ -39,10 +39,20 @@ extension ValuesViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ValueCell") ?? UITableViewCell(style: .default, reuseIdentifier: "ValueCell")
 
-        let value = dataManager.value(at: indexPath.row)
-        cell.textLabel?.text = value
+        let item = dataManager.value(at: indexPath.row)
+        cell.textLabel?.text = item.value
+        let yellowItem = YellowBkgDisplayableValue(displayable: item)
+        let greenItem = GreenDisplayableValue(displayable: yellowItem)
+        cell.configure(with: greenItem)
         
         return cell
+    }
+}
+
+extension UITableViewCell {
+    func configure(with displayable: Displayable) {
+        self.textLabel?.textColor = displayable.displayColor
+        self.textLabel?.backgroundColor = displayable.backgroundColor
     }
 }
 
