@@ -19,6 +19,8 @@ class ValuesViewController: UITableViewController {
         }
     }
     
+    var headerView = MyHeaderView()
+    
     @IBAction func addBtnClicked(_ sender: Any) {
         let addNewVC = self.getAddNewValueViewController()        
         self.navigationController?.pushViewController(addNewVC, animated: true)
@@ -28,6 +30,13 @@ class ValuesViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         self.tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dataManager.add(subscriber: self)
+        dataManager.add(subscriber: headerView)
     }
 }
 
@@ -44,6 +53,23 @@ extension ValuesViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            dataManager.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
 }
 
 extension ValuesViewController {
@@ -55,5 +81,48 @@ extension ValuesViewController {
         }
         
         return addNewVC
+    }
+}
+
+extension ValuesViewController: ValuesSubscriber {
+    func update(valuesCount: Int) {
+        let prefix = valuesCount > 1 ? "⚠️" : ""
+        self.title = "\(prefix) Values"
+    }
+}
+
+class MyHeaderView: UIView {
+    var sign: String = "⭐️" {
+        didSet {
+            self.label.text = sign
+        }
+    }
+    private let label: UILabel
+    
+    override init(frame: CGRect) {
+        label = UILabel()
+        
+        super.init(frame: frame)
+        
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        [label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20.0),
+         label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 20.0),
+         label.topAnchor.constraint(equalTo: self.topAnchor),
+         label.bottomAnchor.constraint(equalTo: self.bottomAnchor),]
+            .forEach { self.addConstraint($0) }
+        
+        label.text = sign
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MyHeaderView: ValuesSubscriber {
+    func update(valuesCount: Int) {
+        self.sign = valuesCount > 1 ? "😬" : "⭐️"
     }
 }
