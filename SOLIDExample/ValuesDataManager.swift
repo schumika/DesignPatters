@@ -8,11 +8,15 @@
 import Foundation
 
 protocol ValuesSubscriber {
-    func update(valuesCount: Int)
+    func update(hasWarning: Bool)
 }
 
 class ValuesDataManager {
-    private var values: [String] = []
+    private var values: [String] = [] {
+        didSet {
+            self.notifySubscribers()
+        }
+    }
     private lazy var subscribers = [ValuesSubscriber]()
     
     var numberOfElements: Int { self.values.count }
@@ -23,12 +27,10 @@ class ValuesDataManager {
     func save(value: String) {
         // Saving...
         self.addNew(value)
-        self.notifySubscribers()
     }
     
     func remove(at idx: Int) {
         self.values.remove(at: idx)
-        self.notifySubscribers()
     }
     
     func add(subscriber: ValuesSubscriber) {
@@ -41,7 +43,7 @@ class ValuesDataManager {
     }
     
     private func notifySubscribers() {
-        subscribers.forEach({ $0.update(valuesCount: values.count) })
+        subscribers.forEach({ $0.update(hasWarning: self.hasWarning) })
     }
 }
 
@@ -53,4 +55,6 @@ extension ValuesDataManager {
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
     }
+    
+    private var hasWarning: Bool { values.count > 1 }
 }

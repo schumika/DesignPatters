@@ -85,8 +85,8 @@ extension ValuesViewController {
 }
 
 extension ValuesViewController: ValuesSubscriber {
-    func update(valuesCount: Int) {
-        let prefix = valuesCount > 1 ? "⚠️" : ""
+    func update(hasWarning: Bool) {
+        let prefix = hasWarning ? "⚠️" : ""
         self.title = "\(prefix) Values"
     }
 }
@@ -122,7 +122,7 @@ class MyHeaderView: UIView {
 }
 
 extension MyHeaderView: ValuesSubscriber {
-    func update(valuesCount: Int) {
-        self.sign = valuesCount > 1 ? "😬" : "⭐️"
+    func update(hasWarning: Bool) {
+        self.sign = hasWarning ? "😬" : "⭐️"
     }
 }
