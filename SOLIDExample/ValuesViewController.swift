@@ -7,7 +7,9 @@
 
 import UIKit
 
-
+extension Notification.Name {
+    static let ValuesUpdated = Notification.Name("ValuesUpdatedNotification")
+}
 
 class ValuesViewController: UITableViewController {
     
@@ -35,8 +37,8 @@ class ValuesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataManager.add(subscriber: self)
-        dataManager.add(subscriber: headerView)
+        NotificationCenter.default.addObserver(self, selector: #selector(update), name: .ValuesUpdated, object: nil)
+        NotificationCenter.default.addObserver(headerView, selector: #selector(update), name: .ValuesUpdated, object: nil)
     }
 }
 
@@ -84,9 +86,9 @@ extension ValuesViewController {
     }
 }
 
-extension ValuesViewController: ValuesSubscriber {
-    func update(hasWarning: Bool) {
-        let prefix = hasWarning ? "⚠️" : ""
+extension ValuesViewController {
+    @objc func update(notification: Notification) {
+        let prefix = (notification.object as? Bool ?? false) ? "⚠️" : ""
         self.title = "\(prefix) Values"
     }
 }
@@ -121,8 +123,8 @@ class MyHeaderView: UIView {
     }
 }
 
-extension MyHeaderView: ValuesSubscriber {
-    func update(hasWarning: Bool) {
-        self.sign = hasWarning ? "😬" : "⭐️"
+extension MyHeaderView {
+    @objc func update(notification: Notification) {
+        self.sign = (notification.object as? Bool ?? false) ? "😬" : "⭐️"
     }
 }

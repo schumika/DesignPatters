@@ -7,17 +7,12 @@
 
 import Foundation
 
-protocol ValuesSubscriber {
-    func update(hasWarning: Bool)
-}
-
 class ValuesDataManager {
     private var values: [String] = [] {
         didSet {
-            self.notifySubscribers()
+            NotificationCenter.default.post(name: .ValuesUpdated, object: self.hasWarning)
         }
     }
-    private lazy var subscribers = [ValuesSubscriber]()
     
     var numberOfElements: Int { self.values.count }
     func value(at ind: Int) -> String {
@@ -27,23 +22,11 @@ class ValuesDataManager {
     func save(value: String) {
         // Saving...
         self.addNew(value)
+        
     }
     
     func remove(at idx: Int) {
         self.values.remove(at: idx)
-    }
-    
-    func add(subscriber: ValuesSubscriber) {
-        subscribers.append(subscriber)
-    }
-    
-    func remove(subscriber filter: (ValuesSubscriber) -> (Bool)) {
-        guard let index = subscribers.firstIndex(where: filter) else { return }
-        subscribers.remove(at: index)
-    }
-    
-    private func notifySubscribers() {
-        subscribers.forEach({ $0.update(hasWarning: self.hasWarning) })
     }
 }
 
