@@ -17,7 +17,7 @@ class ValuesDataManager {
             self.notifySubscribers()
         }
     }
-    private lazy var subscribers = [ValuesSubscriber]()
+    private var subscribers = [ValuesSubscriber]()
     
     var numberOfElements: Int { self.values.count }
     func value(at ind: Int) -> String {
@@ -33,6 +33,7 @@ class ValuesDataManager {
         self.values.remove(at: idx)
     }
     
+    // Subscriber methods
     func add(subscriber: ValuesSubscriber) {
         subscribers.append(subscriber)
     }
