@@ -37,6 +37,10 @@ class ValuesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.subscribeToValuesUpdated()
+    }
+    
+    func subscribeToValuesUpdated() {
         NotificationCenter.default.addObserver(self, selector: #selector(update), name: .ValuesUpdated, object: nil)
         NotificationCenter.default.addObserver(headerView, selector: #selector(update), name: .ValuesUpdated, object: nil)
     }
