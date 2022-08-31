@@ -32,8 +32,10 @@ class ValuesDataManager {
     func remove(at idx: Int) {
         self.values.remove(at: idx)
     }
-    
-    // Subscriber methods
+}
+
+// Subscriber methods
+extension ValuesDataManager {
     func add(subscriber: ValuesSubscriber) {
         subscribers.append(subscriber)
     }
