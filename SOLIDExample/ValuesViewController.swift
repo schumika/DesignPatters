@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 extension Notification.Name {
     static let ValuesUpdated = Notification.Name("ValuesUpdatedNotification")
@@ -40,9 +41,14 @@ class ValuesViewController: UITableViewController {
         self.subscribeToValuesUpdated()
     }
     
+    var subscription: AnyCancellable?
+    
     func subscribeToValuesUpdated() {
-        NotificationCenter.default.addObserver(self, selector: #selector(update), name: .ValuesUpdated, object: nil)
-        NotificationCenter.default.addObserver(headerView, selector: #selector(update), name: .ValuesUpdated, object: nil)
+        let publisher = NotificationCenter.default.publisher(for: .ValuesUpdated)
+        self.subscription = publisher.sink(receiveCompletion: { _ in }) { notification in
+            self.update(notification: notification)
+            self.headerView.update(notification: notification)
+        }
     }
 }
 
