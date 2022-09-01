@@ -18,7 +18,7 @@ class ValuesViewController: UITableViewController {
         }
     }
     
-    var headerView = MyHeaderView()
+    var footerView = LabelView()
     
     @IBAction func addBtnClicked(_ sender: Any) {
         let addNewVC = self.getAddNewValueViewController()        
@@ -42,7 +42,7 @@ class ValuesViewController: UITableViewController {
     func subscribeToValuesUpdated() {        
         self.subscription = self.dataManager.$hasWarning.sink { newVal in
             self.update(hasWarning: newVal)
-            self.headerView.update(hasWarning: newVal)
+            self.footerView.update(hasWarning: newVal)
         }
     }
 }
@@ -70,11 +70,11 @@ extension ValuesViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        footerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
 }
@@ -98,7 +98,7 @@ extension ValuesViewController {
     }
 }
 
-class MyHeaderView: UIView {
+class LabelView: UIView {
     var sign: String = "⭐️" {
         didSet {
             self.label.text = sign
@@ -128,7 +128,7 @@ class MyHeaderView: UIView {
     }
 }
 
-extension MyHeaderView {
+extension LabelView {
     @objc func update(hasWarning: Bool) {
         self.sign = hasWarning ? "😬" : "⭐️"
     }
