@@ -8,10 +8,6 @@
 import UIKit
 import Combine
 
-extension Notification.Name {
-    static let ValuesUpdated = Notification.Name("ValuesUpdatedNotification")
-}
-
 class ValuesViewController: UITableViewController {
     
     var dataManager: ValuesDataManager!
@@ -43,11 +39,10 @@ class ValuesViewController: UITableViewController {
     
     var subscription: AnyCancellable?
     
-    func subscribeToValuesUpdated() {
-        let publisher = NotificationCenter.default.publisher(for: .ValuesUpdated)
-        self.subscription = publisher.sink(receiveCompletion: { _ in }) { notification in
-            self.update(notification: notification)
-            self.headerView.update(notification: notification)
+    func subscribeToValuesUpdated() {        
+        self.subscription = self.dataManager.$hasWarning.sink { newVal in
+            self.update(hasWarning: newVal)
+            self.headerView.update(hasWarning: newVal)
         }
     }
 }
@@ -97,8 +92,8 @@ extension ValuesViewController {
 }
 
 extension ValuesViewController {
-    @objc func update(notification: Notification) {
-        let prefix = (notification.object as? Bool ?? false) ? "⚠️" : ""
+    @objc func update(hasWarning: Bool) {
+        let prefix = hasWarning ? "⚠️" : ""
         self.title = "\(prefix) Values"
     }
 }
@@ -134,7 +129,7 @@ class MyHeaderView: UIView {
 }
 
 extension MyHeaderView {
-    @objc func update(notification: Notification) {
-        self.sign = (notification.object as? Bool ?? false) ? "😬" : "⭐️"
+    @objc func update(hasWarning: Bool) {
+        self.sign = hasWarning ? "😬" : "⭐️"
     }
 }

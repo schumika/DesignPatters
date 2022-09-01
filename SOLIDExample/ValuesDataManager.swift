@@ -7,10 +7,10 @@
 
 import Foundation
 
-class ValuesDataManager {
+class ValuesDataManager: ObservableObject {
     private var values: [String] = [] {
         didSet {
-            NotificationCenter.default.post(name: .ValuesUpdated, object: self.hasWarning)
+            self.hasWarning = values.count > 1
         }
     }
     
@@ -28,6 +28,8 @@ class ValuesDataManager {
     func remove(at idx: Int) {
         self.values.remove(at: idx)
     }
+    
+    @Published var hasWarning: Bool = false
 }
 
 extension ValuesDataManager {
@@ -38,6 +40,4 @@ extension ValuesDataManager {
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
     }
-    
-    private var hasWarning: Bool { values.count > 1 }
 }
