@@ -7,17 +7,8 @@
 
 import Foundation
 
-protocol ValuesSubscriber {
-    func update(hasWarning: Bool)
-}
-
 class ValuesDataManager {
-    private var values: [String] = [] {
-        didSet {
-            self.notifySubscribers()
-        }
-    }
-    private var subscribers = [ValuesSubscriber]()
+    private var values: [String] = []
     
     var numberOfElements: Int { self.values.count }
     func value(at ind: Int) -> String {
@@ -34,22 +25,6 @@ class ValuesDataManager {
     }
 }
 
-// Subscriber methods
-extension ValuesDataManager {
-    func add(subscriber: ValuesSubscriber) {
-        subscribers.append(subscriber)
-    }
-    
-    func remove(subscriber filter: (ValuesSubscriber) -> (Bool)) {
-        guard let index = subscribers.firstIndex(where: filter) else { return }
-        subscribers.remove(at: index)
-    }
-    
-    private func notifySubscribers() {
-        subscribers.forEach({ $0.update(hasWarning: self.hasWarning) })
-    }
-}
-
 extension ValuesDataManager {
     func addNew(_ value: String) {
         self.values.append(value)
@@ -58,6 +33,4 @@ extension ValuesDataManager {
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
     }
-    
-    private var hasWarning: Bool { values.count > 1 }
 }

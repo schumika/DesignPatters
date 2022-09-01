@@ -19,7 +19,7 @@ class ValuesViewController: UITableViewController {
         }
     }
     
-    var headerView = MyHeaderView()
+    var footerView = LabelView()
     
     @IBAction func addBtnClicked(_ sender: Any) {
         let addNewVC = self.getAddNewValueViewController()        
@@ -30,13 +30,6 @@ class ValuesViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         self.tableView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        dataManager.add(subscriber: self)
-        dataManager.add(subscriber: headerView)
     }
 }
 
@@ -63,11 +56,11 @@ extension ValuesViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        footerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
 }
@@ -84,14 +77,7 @@ extension ValuesViewController {
     }
 }
 
-extension ValuesViewController: ValuesSubscriber {
-    func update(hasWarning: Bool) {
-        let prefix = hasWarning ? "⚠️" : ""
-        self.title = "\(prefix) Values"
-    }
-}
-
-class MyHeaderView: UIView {
+class LabelView: UIView {
     var sign: String = "⭐️" {
         didSet {
             self.label.text = sign
@@ -118,11 +104,5 @@ class MyHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension MyHeaderView: ValuesSubscriber {
-    func update(hasWarning: Bool) {
-        self.sign = hasWarning ? "😬" : "⭐️"
     }
 }
