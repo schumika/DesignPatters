@@ -14,7 +14,7 @@ protocol ValuesSubscriber {
 class ValuesDataManager {
     private var values: [String] = [] {
         didSet {
-            self.notifySubscribers()
+            self.hasWarning = values.count > 1
         }
     }
     private var subscribers = [ValuesSubscriber]()
@@ -31,6 +31,12 @@ class ValuesDataManager {
     
     func remove(at idx: Int) {
         self.values.remove(at: idx)
+    }
+    
+    private var hasWarning: Bool = false {
+        didSet {
+            self.notifySubscribers()
+        }
     }
 }
 
@@ -58,6 +64,4 @@ extension ValuesDataManager {
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
     }
-    
-    private var hasWarning: Bool { values.count > 1 }
 }
