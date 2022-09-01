@@ -21,7 +21,7 @@ class ValuesViewController: UITableViewController {
         }
     }
     
-    var headerView = MyHeaderView()
+    var footerView = LabelView()
     
     @IBAction func addBtnClicked(_ sender: Any) {
         let addNewVC = self.getAddNewValueViewController()        
@@ -42,7 +42,7 @@ class ValuesViewController: UITableViewController {
     
     func subscribeToValuesUpdated() {
         NotificationCenter.default.addObserver(self, selector: #selector(update), name: .ValuesUpdated, object: nil)
-        NotificationCenter.default.addObserver(headerView, selector: #selector(update), name: .ValuesUpdated, object: nil)
+        NotificationCenter.default.addObserver(footerView, selector: #selector(update), name: .ValuesUpdated, object: nil)
     }
 }
 
@@ -69,11 +69,11 @@ extension ValuesViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        footerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
 }
@@ -97,7 +97,7 @@ extension ValuesViewController {
     }
 }
 
-class MyHeaderView: UIView {
+class LabelView: UIView {
     var sign: String = "⭐️" {
         didSet {
             self.label.text = sign
@@ -127,7 +127,7 @@ class MyHeaderView: UIView {
     }
 }
 
-extension MyHeaderView {
+extension LabelView {
     @objc func update(notification: Notification) {
         self.sign = (notification.object as? Bool ?? false) ? "😬" : "⭐️"
     }
