@@ -10,6 +10,12 @@ import Foundation
 class ValuesDataManager {
     private var values: [String] = [] {
         didSet {
+            self.hasWarning = values.count > 1
+        }
+    }
+    
+    private var hasWarning: Bool = false {
+        didSet {
             NotificationCenter.default.post(name: .ValuesUpdated, object: self.hasWarning)
         }
     }
@@ -38,6 +44,4 @@ extension ValuesDataManager {
     func containsValue(_ val: String) -> Bool {
         self.values.contains(val)
     }
-    
-    private var hasWarning: Bool { values.count > 1 }
 }
