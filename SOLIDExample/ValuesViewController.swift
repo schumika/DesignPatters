@@ -11,7 +11,7 @@ import UIKit
 
 class ValuesViewController: UITableViewController {
     
-    var dataManager: ValuesDataManager!
+    var dataManager: ValuesDataManagerProtocol!
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -50,9 +50,7 @@ extension ValuesViewController {
     func getAddNewValueViewController() -> AddNewValueViewController {
         let addNewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewValueViewController") as? AddNewValueViewController ?? AddNewValueViewController()
         
-        addNewVC.onSave = { [weak self] value in
-            self?.dataManager.save(value: value)
-        }
+        addNewVC.dataManager = self.dataManager
         
         return addNewVC
     }

@@ -8,7 +8,18 @@
 import Foundation
 
 
-class ValuesDataManager {
+protocol ValuesDataSaver {
+    func save(value: String)
+}
+
+protocol ValuesDataSource {
+    var numberOfElements: Int { get }
+    func value(at ind: Int) -> String
+}
+
+typealias ValuesDataManagerProtocol = ValuesDataSaver & ValuesDataSource
+
+class ValuesDataManager: ValuesDataManagerProtocol {
     private var values: [String] = []
     
     var numberOfElements: Int { self.values.count }

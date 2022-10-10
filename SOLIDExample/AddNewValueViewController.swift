@@ -12,7 +12,7 @@ class AddNewValueViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneLabel: UILabel!
     
-    var onSave:(String)->() = { _ in }
+    var dataManager: ValuesDataSaver!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,7 +22,7 @@ class AddNewValueViewController: UIViewController {
     
     
     @IBAction func doneClicked(_ sender: Any) {
-        self.onSave(self.textField.text ?? "")
+        self.dataManager!.save(value: self.textField.text ?? "")
         self.onDone()
     }
     
@@ -44,30 +44,3 @@ class AddNewValueViewController: UIViewController {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- let alert = UIAlertController(title: "Error", message: "Please try again", preferredStyle: .alert)
- alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
- self.present(alert, animated: true, completion: nil)
- */
