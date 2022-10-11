@@ -7,7 +7,19 @@
 
 import UIKit
 
+protocol TextFieldConfigurator {
+    var textfieldBackgroundColor: UIColor { get }
+}
+
+struct SimpleConfiguration: BaseConfiguration & TextFieldConfigurator {
+    var title: String = "_Add New_"
+    var backgroundColor: UIColor = .systemMint
+    var textfieldBackgroundColor: UIColor = .systemPink
+}
+
 class AddNewValueViewController: UIViewController {
+    
+    var configuration = SimpleConfiguration()
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneLabel: UILabel!
@@ -16,6 +28,10 @@ class AddNewValueViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.title = self.configuration.title
+        self.view.backgroundColor = self.configuration.backgroundColor
+        self.textField.backgroundColor = self.configuration.textfieldBackgroundColor
         
         self.textField.becomeFirstResponder()
     }
@@ -44,30 +60,3 @@ class AddNewValueViewController: UIViewController {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- let alert = UIAlertController(title: "Error", message: "Please try again", preferredStyle: .alert)
- alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
- self.present(alert, animated: true, completion: nil)
- */

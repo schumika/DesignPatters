@@ -7,11 +7,25 @@
 
 import UIKit
 
+protocol BaseConfiguration {
+    var title: String { get }
+    var backgroundColor: UIColor { get }
+}
 
+protocol CellConfiguration {
+    var cellBackgroundColor: UIColor { get }
+}
+
+struct ValuesConfiguration: BaseConfiguration & CellConfiguration {
+    var title: String = "_Values_"
+    var backgroundColor: UIColor = .yellow
+    var cellBackgroundColor: UIColor = .lightGray
+}
 
 class ValuesViewController: UITableViewController {
     
     var dataManager: ValuesDataManager!
+    var configuration = ValuesConfiguration()
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -27,6 +41,9 @@ class ValuesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.title = self.configuration.title
+        self.view.backgroundColor = self.configuration.backgroundColor
+        
         self.tableView.reloadData()
     }
 }
@@ -41,6 +58,7 @@ extension ValuesViewController {
 
         let value = dataManager.value(at: indexPath.row)
         cell.textLabel?.text = value
+        cell.backgroundColor = self.configuration.cellBackgroundColor
         
         return cell
     }
