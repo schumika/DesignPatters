@@ -28,6 +28,6 @@ extension ValuesDataManager {
     }
     
     func containsValue(_ val: String) -> Bool {
-        self.values.map { $0.value }.contains(val)
+        self.values.map { $0.text }.contains(val)
     }
 }

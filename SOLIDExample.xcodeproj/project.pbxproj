@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		582C1C032862D04000AA5CB4 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C1C022862D04000AA5CB4 /* WelcomeViewController.swift */; };
-		58484BFD289AA40000CC7C4A /* DisplayableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58484BFC289AA40000CC7C4A /* DisplayableValue.swift */; };
+		584863BF29190D2300A8E970 /* DisplayableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584863BE29190D2300A8E970 /* DisplayableValue.swift */; };
+		584863C329190D8F00A8E970 /* TxtDisplayableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584863C129190D8F00A8E970 /* TxtDisplayableValue.swift */; };
+		584863C429190D8F00A8E970 /* BkgDisplayableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584863C229190D8F00A8E970 /* BkgDisplayableValue.swift */; };
 		5896C4FB2860A4AA00E5AA26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5896C4FA2860A4AA00E5AA26 /* AppDelegate.swift */; };
 		5896C4FD2860A4AA00E5AA26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5896C4FC2860A4AA00E5AA26 /* SceneDelegate.swift */; };
 		5896C5022860A4AB00E5AA26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5896C5002860A4AB00E5AA26 /* Main.storyboard */; };
@@ -21,7 +23,9 @@
 
 /* Begin PBXFileReference section */
 		582C1C022862D04000AA5CB4 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		58484BFC289AA40000CC7C4A /* DisplayableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableValue.swift; sourceTree = "<group>"; };
+		584863BE29190D2300A8E970 /* DisplayableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableValue.swift; sourceTree = "<group>"; };
+		584863C129190D8F00A8E970 /* TxtDisplayableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TxtDisplayableValue.swift; sourceTree = "<group>"; };
+		584863C229190D8F00A8E970 /* BkgDisplayableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BkgDisplayableValue.swift; sourceTree = "<group>"; };
 		5896C4F72860A4AA00E5AA26 /* SOLIDExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOLIDExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5896C4FA2860A4AA00E5AA26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5896C4FC2860A4AA00E5AA26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +56,14 @@
 			path = Next;
 			sourceTree = "<group>";
 		};
+		584863C029190D3400A8E970 /* Restricted */ = {
+			isa = PBXGroup;
+			children = (
+				584863BE29190D2300A8E970 /* DisplayableValue.swift */,
+			);
+			path = Restricted;
+			sourceTree = "<group>";
+		};
 		5896C4EE2860A4AA00E5AA26 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +88,9 @@
 				582C1C022862D04000AA5CB4 /* WelcomeViewController.swift */,
 				5896C5322860CC9A00E5AA26 /* ValuesDataManager.swift */,
 				5896C50E2860A4DF00E5AA26 /* ValuesViewController.swift */,
-				58484BFC289AA40000CC7C4A /* DisplayableValue.swift */,
+				584863C229190D8F00A8E970 /* BkgDisplayableValue.swift */,
+				584863C129190D8F00A8E970 /* TxtDisplayableValue.swift */,
+				584863C029190D3400A8E970 /* Restricted */,
 				5896C5102860AEA500E5AA26 /* AddNewValueViewController.swift */,
 				5896C5002860A4AB00E5AA26 /* Main.storyboard */,
 				5896C5032860A4AE00E5AA26 /* Assets.xcassets */,
@@ -158,12 +172,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584863BF29190D2300A8E970 /* DisplayableValue.swift in Sources */,
 				5896C4FB2860A4AA00E5AA26 /* AppDelegate.swift in Sources */,
 				5896C5112860AEA500E5AA26 /* AddNewValueViewController.swift in Sources */,
+				584863C329190D8F00A8E970 /* TxtDisplayableValue.swift in Sources */,
 				5896C4FD2860A4AA00E5AA26 /* SceneDelegate.swift in Sources */,
 				582C1C032862D04000AA5CB4 /* WelcomeViewController.swift in Sources */,
-				58484BFD289AA40000CC7C4A /* DisplayableValue.swift in Sources */,
 				5896C5332860CC9A00E5AA26 /* ValuesDataManager.swift in Sources */,
+				584863C429190D8F00A8E970 /* BkgDisplayableValue.swift in Sources */,
 				5896C50F2860A4DF00E5AA26 /* ValuesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
