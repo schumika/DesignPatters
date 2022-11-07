@@ -41,7 +41,7 @@ extension ValuesViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ValueCell", for: indexPath) as! ValueTableViewCell
 
         let item = dataManager.value(at: indexPath.row)
-        cell.configure(with: item)
+        cell.configure(with: TxtDisplayableValue(displayable: BkgDisplayableValue(displayable: item, backgroundColor: .lightGray)))
         
         return cell
     }
