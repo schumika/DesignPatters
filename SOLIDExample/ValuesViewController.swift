@@ -15,6 +15,7 @@ class ValuesViewController: UITableViewController {
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
+            tableView.register(UINib(nibName: "ValueTableViewCell", bundle: nil), forCellReuseIdentifier: "ValueCell")
             tableView.dataSource = self
         }
     }
@@ -37,20 +38,12 @@ extension ValuesViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ValueCell") ?? UITableViewCell(style: .default, reuseIdentifier: "ValueCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ValueCell", for: indexPath) as! ValueTableViewCell
 
         let item = dataManager.value(at: indexPath.row)
         cell.configure(with: item)
         
         return cell
-    }
-}
-
-extension UITableViewCell {
-    func configure(with displayable: Displayable) {
-        self.textLabel?.text = displayable.text
-        self.textLabel?.textColor = displayable.textColor
-        self.textLabel?.backgroundColor = displayable.backgroundColor
     }
 }
 

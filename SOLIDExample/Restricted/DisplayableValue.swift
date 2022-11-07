@@ -22,5 +22,5 @@ final class DisplayableValue: Displayable {
     
     var text: String { value }
     var textColor: UIColor {  .systemBlue }
-    var backgroundColor: UIColor { .systemMint }
+    var backgroundColor: UIColor { .systemGray5 }
 }
