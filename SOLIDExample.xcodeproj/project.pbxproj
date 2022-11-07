@@ -52,6 +52,14 @@
 			path = Next;
 			sourceTree = "<group>";
 		};
+		584863AF2918E6ED00A8E970 /* Restricted */ = {
+			isa = PBXGroup;
+			children = (
+				58484BFC289AA40000CC7C4A /* DisplayableValue.swift */,
+			);
+			path = Restricted;
+			sourceTree = "<group>";
+		};
 		5896C4EE2860A4AA00E5AA26 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +84,7 @@
 				582C1C022862D04000AA5CB4 /* WelcomeViewController.swift */,
 				5896C5322860CC9A00E5AA26 /* ValuesDataManager.swift */,
 				5896C50E2860A4DF00E5AA26 /* ValuesViewController.swift */,
-				58484BFC289AA40000CC7C4A /* DisplayableValue.swift */,
+				584863AF2918E6ED00A8E970 /* Restricted */,
 				5896C5102860AEA500E5AA26 /* AddNewValueViewController.swift */,
 				5896C5002860A4AB00E5AA26 /* Main.storyboard */,
 				5896C5032860A4AE00E5AA26 /* Assets.xcassets */,
