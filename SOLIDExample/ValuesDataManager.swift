@@ -34,3 +34,52 @@ extension ValuesDataManager {
         self.values.contains(val)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+protocol ValuesSubscriber {
+    func update(hasWarning: Bool)
+}
+
+// Subscriber methods
+extension ValuesDataManager {
+    func add(subscriber: ValuesSubscriber) {
+        subscribers.append(subscriber)
+    }
+    
+    func remove(subscriber filter: (ValuesSubscriber) -> (Bool)) {
+        guard let index = subscribers.firstIndex(where: filter) else { return }
+        subscribers.remove(at: index)
+    }
+    
+    private func notifySubscribers() {
+        subscribers.forEach({ $0.update(hasWarning: self.hasWarning) })
+    }
+}
+*/
